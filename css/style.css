@@ -1,10 +1,16 @@
-.ali{
-    background-color: #fff;
-    padding: 10px 20px;
-    border: 0;
-}
 body{
     background-color: #e7f2fd;
+    height: 100vh;
+}
+.links{
+    background-color: #fff;
+    padding: 10px 16px;
+    border: 0;
+    max-width: 100px;
+}
+.active{
+   background-color: rgb(22, 64, 250);
+   color: #fff ;
 }
 .img-fluid{
     border: 4px solid #fff;
@@ -15,25 +21,22 @@ body{
     bottom: 0;
 }
 .cover{
-    position:fixe;
+    position:fixed;
+    background-color:rgba(0, 0, 0, 0.6);
     top:0;
     left: 0;
     right: 0;
     bottom: 0;
-    display: non;
+    display: none;
     justify-content: center;
     align-items: center;
 }
-/*
-    background-color:rgba(0, 0, 0, 0.6);
-
-*/
 #light-boxItem{
     background-image:url(../imags/1.jfif);
     background-size: 100% 100%;
-    width: 70%;
     margin: auto;
-    height: 440px;
+    width: 50%;
+    height: 500px;
     display:flex;
     align-items: center;  
     justify-content: space-between;
@@ -47,6 +50,11 @@ body{
 img , i{
     cursor: pointer;
 }
-
+@media screen and (max-width:567px) {
+#light-boxItem{
+    width:95%;
+    height: 350px;
+}
+}
 
 

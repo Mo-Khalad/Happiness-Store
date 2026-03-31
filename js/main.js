@@ -1,7 +1,17 @@
-var showAli=document.getElementById("showAli");
-var phone=document.getElementById("phone");
+var cover=document.querySelector(".cover")
+var lightBoxItem=document.getElementById("light-boxItem")
+
+// products buttons
+var showAll_btn=document.getElementById("showAll_btn");
+var phones_btn=document.getElementById("phones_btn");
 var clothes_btn=document.getElementById("clothes_btn");
-var shoe=document.getElementById("shoes");
+var shoes_btn=document.getElementById("shoes_btn");
+
+// slider image
+var imgFour=Array.from(document.getElementsByClassName("img-four"));
+var imgFour1=Array.from(document.getElementsByClassName("img-four1"));
+var imgFour2=Array.from(document.getElementsByClassName("img-four2"));
+var imgs=Array.from(document.getElementsByClassName("img-fluid"));
 
 //clothes Products
 var clothe1=document.getElementById("clothe1")
@@ -26,19 +36,11 @@ var closeIcon=document.getElementById("close");
 var prevIcon=document.getElementById("prev");
 var nextIcon=document.getElementById("next");
 
-var cover=document.querySelector(".cover")
-var lightBoxItem=document.getElementById("light-boxItem")
-var imgFour=Array.from(document.getElementsByClassName("img-four"));
-var imgFour1=Array.from(document.getElementsByClassName("img-four1"));
-var imgFour2=Array.from(document.getElementsByClassName("img-four2"));
-var imgs=Array.from(document.getElementsByClassName("img-fluid"));
-var index;
 var Interval1 = '';
 var Interval2 = '';
 var Interval3 = '';
 var Interval4 = '';
-
-getShowAli()
+var index;
 
 //slider hide function 
 function getCloseSlider(){
@@ -53,9 +55,7 @@ closeIcon.addEventListener("click",getCloseSlider)
 //slider show functions 
 for(var i=0 ;i<imgs.length;i++){ 
     imgs[i].addEventListener("click",function(e){
- if(showAli.innerHTML=="showAli"){ 
-    console.log("mo");
-    
+ if(showAll_btn.innerHTML=="Show All"){     
        cover.style.display="flex";
        var imgSrc=(e.target.src);
        lightBoxItem.style.backgroundImage=`url(${imgSrc})`;
@@ -66,7 +66,7 @@ for(var i=0 ;i<imgs.length;i++){
 }
 for(var i=0;i<imgFour.length;i++){
     imgFour[i].addEventListener("click",function(e){
-     if(phone.innerHTML=="Phone"){
+     if(phones_btn.innerHTML=="Phones"){
          cover.style.display="flex";
          var imgScr= e.target.src;
          lightBoxItem.style.backgroundImage=`url(${imgScr})`
@@ -75,18 +75,6 @@ for(var i=0;i<imgFour.length;i++){
       }
 }
     )
-}
-for(var i=0;i<imgFour1.length;i++){
-    imgFour1[i].addEventListener("click",function(e){
-    if(shoe.innerHTML=="Shoes"){
-         cover.style.display="flex";
-         var imgScr= e.target.src;
-         lightBoxItem.style.backgroundImage=`url(${imgScr})`
-         index=imgFour1.indexOf(e.target)
-         Interval4 = setInterval(getNextSlider4 , 3000)
-    }
-}
- )
 }
 for(var i=0;i<imgFour2.length;i++){
     imgFour2[i].addEventListener("click",function(e){
@@ -100,6 +88,18 @@ for(var i=0;i<imgFour2.length;i++){
 }
     )
 } 
+for(var i=0;i<imgFour1.length;i++){
+    imgFour1[i].addEventListener("click",function(e){
+    if(shoes_btn.innerHTML=="Shoes"){
+         cover.style.display="flex";
+         var imgScr= e.target.src;
+         lightBoxItem.style.backgroundImage=`url(${imgScr})`
+         index=imgFour1.indexOf(e.target)
+         Interval4 = setInterval(getNextSlider4 , 3000)
+    }
+}
+ )
+}
 
 // arrow next functions
 function getNextSlider1(){{
@@ -107,7 +107,7 @@ function getNextSlider1(){{
    if(index==imgs.length){
         index=0;
     }
-    var imgScr=imgs[index].src;
+    var imgScr=imgs[index].src;    
     lightBoxItem.style.backgroundImage=`url(${imgScr})`   
 }} 
 function getNextSlider2(){{
@@ -116,7 +116,7 @@ function getNextSlider2(){{
         index=0;
     }
     var imgScr=imgFour[index].src;
-    lightBoxItem.style.backgroundImage=`url(${imgScr})`   
+    lightBoxItem.style.backgroundImage=`url(${imgScr})`       
 }} 
 function getNextSlider3(){{
     index++;
@@ -135,16 +135,16 @@ function getNextSlider4(){{
     lightBoxItem.style.backgroundImage=`url(${imgScr})`   
 }} 
 nextIcon.onclick=function(){
-if(showAli.innerHTML=='showAli'){
+if(showAll_btn.innerHTML=='Show All'){
    getNextSlider1();
 }
-if(shoe.innerHTML=="Shoes"){
+if(shoes_btn.innerHTML=="Shoes"){
    getNextSlider4();
 }
 else if(clothes_btn.innerHTML=='Clothes'){  
    getNextSlider3()
 }
-else if(phone.innerHTML=="Phone"){
+else if(phones_btn.innerHTML=="Phones"){
    getNextSlider2();
 }
 }
@@ -158,20 +158,19 @@ function getPrevSlider1(){
     var imgScr=imgs[index].src;
     lightBoxItem.style.backgroundImage=`url(${imgScr})`   
 } 
-function getPrevSlider2(){
-    index--;
+function getPrevSlider2(i){
+     index--;
    if(index<0){
         index=imgFour.length-1;
     }
     var imgScr=imgFour[index].src;
-    lightBoxItem.style.backgroundImage=`url(${imgScr})`   
-} 
+    lightBoxItem.style.backgroundImage=`url(${imgScr})`
+}
 function getPrevSlider3(){{
     index--;
 if(index<0){
     index=imgFour2.length-1;
 }
-    
  var imgScr=imgFour2[index].src;
  lightBoxItem.style.backgroundImage=`url(${imgScr})`
    
@@ -185,22 +184,22 @@ function getPrevSlider4(){
   lightBoxItem.style.backgroundImage=`url(${imgScr})`   
 } 
 prevIcon.onclick=function() {
-if(showAli.innerHTML=='showAli'){
+if(showAll_btn.innerHTML=='Show All'){
     getPrevSlider1();
 }
-if(shoe.innerHTML=="Shoes"){
-    getPrevSlider4();
+else if(phones_btn.innerHTML=="Phones"){
+    getPrevSlider2();
 }
 else if(clothes_btn.innerHTML=='Clothes'){
     getPrevSlider3();
 }
-else if(phone.innerHTML=="Phone"){
-    getPrevSlider2();
+if(shoes_btn.innerHTML=="Shoes"){
+    getPrevSlider4();
 }
 }
 
 // filter products functions 
-function getShowAli(){
+function getShowAll(){
     shoe1.style.display="";
     shoe2.style.display="";
     shoe3.style.display="";
@@ -216,22 +215,22 @@ function getShowAli(){
     clothe2.style.display="";
     clothe3.style.display="";
    
-    showAli.style.backgroundColor=" rgb(22, 64, 250)";
-    phone.style.backgroundColor=" #fff";
+    showAll_btn.style.backgroundColor=" rgb(22, 64, 250)";
+    phones_btn.style.backgroundColor=" #fff";
     clothes_btn.style.backgroundColor=" #fff";
-    shoe.style.backgroundColor=" #fff";
+    shoes_btn.style.backgroundColor=" #fff";
 
-    shoe.style.color='#000';
-    phone.style.color='#000';
+    shoes_btn.style.color='#000';
+    phones_btn.style.color='#000';
     clothes_btn.style.color='#000';
-    showAli.style.color='#fff';
-    document.getElementById("showAli").innerHTML="showAli";
-    document.getElementById("shoes").innerHTML="shoes"
+    showAll_btn.style.color='#fff';
+    document.getElementById("showAll_btn").innerHTML="Show All";
+    document.getElementById("shoes_btn").innerHTML="shoes"
     document.getElementById('clothes_btn').innerHTML='clothes';
-    document.getElementById("phone").innerHTML="phone";
+    document.getElementById("phones_btn").innerHTML="phones";    
 }
-showAli.addEventListener("click",getShowAli)
-function getPhone(){
+showAll_btn.addEventListener("click",getShowAll)
+function getPhones(){
     clothe4.style.display="none";
     clothe1.style.display="none";
     clothe2.style.display="none";
@@ -247,22 +246,22 @@ function getPhone(){
     shoe3.style.display="none";
     shoe4.style.display="none";
 
-    phone.style.backgroundColor=" rgb(22, 64, 250)";
-    shoe.style.backgroundColor=" #fff";
+    phones_btn.style.backgroundColor=" rgb(22, 64, 250)";
+    shoes_btn.style.backgroundColor=" #fff";
     clothes_btn.style.backgroundColor=" #fff";
-    showAli.style.backgroundColor=" #fff";
+    showAll_btn.style.backgroundColor=" #fff";
 
-    showAli.style.color='#000';
-    shoe.style.color='#000';
+    showAll_btn.style.color='#000';
+    shoes_btn.style.color='#000';
     clothes_btn.style.color='#000';
-    phone.style.color='#fff';
+    phones_btn.style.color='#fff';
   
-    document.getElementById("shoes").innerHTML="shoes";
-    document.getElementById("showAli").innerHTML="show ali";
-    document.getElementById("phone").innerHTML="Phone";
+    document.getElementById("shoes_btn").innerHTML="shoes";
+    document.getElementById("showAll_btn").innerHTML="show all";
+    document.getElementById("phones_btn").innerHTML="Phones";
     document.getElementById('clothes_btn').innerHTML='clothes';
 }
-phone.addEventListener("click", getPhone)
+phones_btn.addEventListener("click", getPhones)
 function getClothes(){
     clothe4.style.display="";
     clothe1.style.display="";
@@ -280,22 +279,22 @@ function getClothes(){
     shoe4.style.display="none";
 
     clothes_btn.style.backgroundColor=" rgb(22, 64, 250)";
-    phone.style.backgroundColor=" #fff";
-    showAli.style.backgroundColor=" #fff";
-    shoe.style.backgroundColor=" #fff";
+    phones_btn.style.backgroundColor=" #fff";
+    showAll_btn.style.backgroundColor=" #fff";
+    shoes_btn.style.backgroundColor=" #fff";
 
-    showAli.style.color='#000';
-    phone.style.color='#000';
-    shoe.style.color='#000';
+    showAll_btn.style.color='#000';
+    phones_btn.style.color='#000';
+    shoes_btn.style.color='#000';
     clothes_btn.style.color='#fff';
 
     document.getElementById('clothes_btn').innerHTML='Clothes';
-    document.getElementById("shoes").innerHTML="shoes";
-    document.getElementById("showAli").innerHTML="show ali";
-    document.getElementById("phone").innerHTML="phone";
+    document.getElementById("shoes_btn").innerHTML="shoes";
+    document.getElementById("showAll_btn").innerHTML="show all";
+    document.getElementById("phones_btn").innerHTML="phones";
 }
 clothes_btn.addEventListener("click",getClothes)
-function getShoe(){
+function getShoes(){
     clothe1.style.display="none";
     clothe2.style.display="none";
     clothe3.style.display="none";
@@ -311,53 +310,51 @@ function getShoe(){
     shoe3.style.display="";
     shoe4.style.display="";
     
-    shoe.style.backgroundColor=" rgb(22, 64, 250)";
-
-    phone.style.backgroundColor=" #fff";
+    shoes_btn.style.backgroundColor=" rgb(22, 64, 250)";
+    phones_btn.style.backgroundColor=" #fff";
     clothes_btn.style.backgroundColor=" #fff";
-    showAli.style.backgroundColor=" #fff";
+    showAll_btn.style.backgroundColor=" #fff";
 
-    showAli.style.color='#000';
-    phone.style.color='#000';
+    showAll_btn.style.color='#000';
+    phones_btn.style.color='#000';
     clothes_btn.style.color='#000';
-    shoe.style.color='#fff';
-    shoe.innerHTML="Shoes"
-    document.getElementById("showAli").innerHTML="show ali";
+    shoes_btn.style.color='#fff';
+    shoes_btn.innerHTML="Shoes"
+    document.getElementById("showAll_btn").innerHTML="show all";
     document.getElementById('clothes_btn').innerHTML='clothes';
-    document.getElementById("phone").innerHTML="phone";
+    document.getElementById("phones_btn").innerHTML="phones";
 }
-shoe.addEventListener("click", getShoe)
+shoes_btn.addEventListener("click", getShoes)
 
 //Use the keyboard function to navigate between the next, previous, and hide items.
 function getKeyboard(e){
  if(e.key=='ArrowRight'){
-    if(showAli.innerHTML=='showAli'){
+    if(showAll_btn.innerHTML=='Show All'){
       getNextSlider1();
     }
-    else if(shoe.innerHTML=="Shoes"){
-      getNextSlider4();
+    else if(phones_btn.innerHTML=="Phones"){
+      getNextSlider2();
     }
     else if(clothes_btn.innerHTML=='Clothes'){
       getNextSlider3();
     }
-    else if(phone.innerHTML=="Phone"){
-      getNextSlider2();
+    else if(shoes_btn.innerHTML=="Shoes"){
+      getNextSlider4();
     }
     }
 else if(e.key=="ArrowLeft"){
-    if(showAli.innerHTML=='showAli'){
+    if(showAll_btn.innerHTML=='Show All'){
         getPrevSlider1();
     }
-    else if(shoe.innerHTML=="Shoes"){
-        getPrevSlider4();
-    }
+    else if(phones_btn.innerHTML=="Phones"){
+        getPrevSlider2();
+    }   
     else if(clothes_btn.innerHTML=='Clothes'){
         getPrevSlider3();
     }
-    else if(phone.innerHTML=="Phone"){
-        getPrevSlider2();
-    }    
-
+    else if(shoes_btn.innerHTML=="Shoes"){
+        getPrevSlider4();
+    }
 }
     else if(e.key=='Escape'){
         getCloseSlider();
